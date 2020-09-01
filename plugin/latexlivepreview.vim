@@ -87,7 +87,7 @@ function! s:Compile()
     " Run the previewer again -> requires special Skim wrapper skript and
     " macOS
     if ( s:mac_os == 1 ) && ( s:skim == 1 )
-        call s:RunInBackground(s:previewer . ' ' . b:livepreview_buf_datap['tmp_out_file'])
+        call s:RunInBackground(s:previewer . ' ' . b:livepreview_buf_data['tmp_out_file'])
     endif
 
     lcd -
@@ -194,7 +194,7 @@ EEOOFF
                 \ fnamemodify(l:root_file, ':t:r') . '.pdf'
 
     " Store output file in buf_data as well
-    let b:livepreview_buf_datap['tmp_out_file'] = l:tmp_out_file
+    let b:livepreview_buf_data['tmp_out_file'] = l:tmp_out_file
 
     let b:livepreview_buf_data['run_cmd'] =
                 \ 'env ' .
