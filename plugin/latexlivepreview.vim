@@ -85,6 +85,12 @@ function! s:Compile()
 
     call s:RunInBackground(b:livepreview_buf_data['run_cmd'])
 
+    " Run the previewer again -> requires special Skim wrapper skript and
+    " macOS
+    if ( s:mac_os == 1 ) && ( s:skim == 1 )
+        call s:RunInBackground(s:previewer . ' ' . b:livepreview_buf_datap['tmp_out_file'])
+    endif
+
     lcd -
 endfunction
 
@@ -188,6 +194,9 @@ EEOOFF
     let l:tmp_out_file = l:tmp_root_dir . '/' .
                 \ fnamemodify(l:root_file, ':t:r') . '.pdf'
 
+    " Store output file in buf_data as well
+    let b:livepreview_buf_datap['tmp_out_file'] = l:tmp_out_file
+
     let b:livepreview_buf_data['run_cmd'] =
                 \ 'env ' .
                 \       'TEXMFOUTPUT=' . l:tmp_root_dir . ' ' .
@@ -269,7 +278,13 @@ EEOOFF
 
     function! s:ValidateExecutables( context, executables )
         for possible_engine in a:executables
-            if executable(possible_engine)
+            " This code breaks the preview on macOs when using the 'open'
+            " command, so there is now a macOs override
+            if ( s:mac_os == 0 ) && executable(possible_engine)
+                return possible_engine
+            elseif ( s:mac_os == 1 )
+                " Skip check and just trust the user that a valid command was
+                " chosen
                 return possible_engine
             endif
         endfor
@@ -287,6 +302,10 @@ EEOOFF
 
     " Select bibliography executable
     let s:use_biber = get(g:, 'livepreview_use_biber', 0)
+
+    " Some macOS-spcifics
+    let s:mac_os = get(g:, 'livepreview_using_mac_os', 0)
+    let s:skim = get(g:, 'livepreview_using_skim', 0)
 
     return 0
 endfunction

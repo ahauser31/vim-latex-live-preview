@@ -4,8 +4,11 @@ A Vim Plugin for Lively Previewing LaTeX PDF Output
 This plugin provides a live preview of the output PDF of your LaTeX file. The
 display of the output PDF file will be updated lively as you type (just hold
 the cursor and you will see the PDF file updated). Currently,
-vim-latex-live-preview only support UNIX-like systems. [Please let me know if
-you have any suggestions.](.github/CONTRIBUTING.md)
+vim-latex-live-preview only support UNIX-like systems.
+  
+This fork includes several changes for usage of the plugin on macOs, specifically
+for using the viewer Skim. If you are not using macOS / Skim, please stick to
+the main branch by xuhdev.
 
 Table of Contents
 -----------------
@@ -104,7 +107,24 @@ let g:livepreview_previewer = 'your_viewer'
 
 Please note that not every pdf viewer could work with this plugin. Currently
 evince and okular are known to work well. You can find a list of known working
-pdf viewers [here](https://github.com/xuhdev/vim-latex-live-preview/wiki/Known-Working-PDF-Viewers).
+pdf viewers [here](https://github.com/xuhdev/vim-latex-live-preview/wiki/Known-Working-PDF-Viewers).  
+
+Special note for using the Skim PDF viewer on macOS:  
+Please use the `skimmer` shell script provided to launch Skim & reload files.
+
+```vim
+let g:livepreview_previewer = 'skimmer'
+```
+
+If not in your path and if the script can't find it, please copy it to a folder
+on your path and make sure it can be executed.  
+
+In addition, please set the following two variables:
+
+```vim
+let g:livepreview_using_mac_os = 1
+let g:livepreview_using_skim = 1
+```
 
 ### TeX engine
 
@@ -149,6 +169,17 @@ let g:livepreview_cursorhold_recompile = 0
 
 Known issues
 ------------
+
+### No valid executable found on macOS
+
+This error happens when using the `open` command to launch a macOs app as the
+previewer. Set the following variable to disable the check the script does.
+Please note that this may break if you do not set a valid application in your
+path.
+
+```vim
+let g:livepreview_using_mac_os = 1
+```
 
 ### Swap error
 
