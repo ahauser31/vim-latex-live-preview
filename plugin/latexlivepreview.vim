@@ -25,7 +25,6 @@ if exists("g:loaded_vim_live_preview")
     echo "Already loaded"
     finish
 endif
-let g:loaded_vim_live_preview = 1
 
 " Check mkdir feature
 if (!exists("*mkdir"))
@@ -294,6 +293,10 @@ EEOOFF
         throw "End execution"
     endfunction
 
+    " Some macOS-spcifics
+    let s:mac_os = get(g:, 'livepreview_using_mac_os', 0)
+    let s:skim = get(g:, 'livepreview_using_skim', 0)
+
     " Get the tex engine
     let s:engine = s:ValidateExecutables('livepreview_engine', [get(g:, 'livepreview_engine', ''), 'pdflatex', 'xelatex'])
 
@@ -303,15 +306,12 @@ EEOOFF
     " Select bibliography executable
     let s:use_biber = get(g:, 'livepreview_use_biber', 0)
 
-    " Some macOS-spcifics
-    let s:mac_os = get(g:, 'livepreview_using_mac_os', 0)
-    let s:skim = get(g:, 'livepreview_using_skim', 0)
-
     return 0
 endfunction
 
 try
     let s:init_msg = s:Initialize()
+    let g:loaded_vim_live_preview = 1
 catch
     finish
 endtry
