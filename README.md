@@ -1,10 +1,8 @@
 A Vim Plugin for Lively Previewing LaTeX PDF Output
 ===================================================
 
-This plugin provides a live preview of the output PDF of your LaTeX file. The
-display of the output PDF file will be updated lively as you type (just hold
-the cursor and you will see the PDF file updated). Currently,
-vim-latex-live-preview only support UNIX-like systems.
+This plugin provides a preview of the output PDF of your LaTeX file.
+Currently, vim-latex-live-preview-nopython only support UNIX-like systems.
   
 This fork includes several changes for usage of the plugin on macOs, specifically
 for using the viewer Skim. If you are not using macOS / Skim, please stick to
@@ -77,14 +75,15 @@ Copy `plugin/latexlivepreview.vim` to `~/.vim/plugin`.
 Usage
 -----
 
-Simply execute `:LatexPreview` to launch the previewer. Then try to type in
-Vim and you should see the live update. The updating time could be set by Vim's
-['updatetime'][] option. If your pdf viewer crashes when updates happen, you can
-try to set 'updatetime' to a higher value to make it update less frequently. The
-suggested value of 'updatetime' is `1000`.
+Simply execute `:LatexPreview` to launch the previewer. Then type in
+Vim, save the file and you should see the preview update.
 
-If the root file is not the file you are currently editing, please switch to the root
-file before running the script.
+If the root file is not the file you are currently editing, please switch to the
+root file before running the script.
+
+To compile your latex document (without poluting your working folder with intermediary
+files), run `:LatexCompile`. The previewer is not opened in this case and the output
+file is put in your working directory.
 
 Configuration
 -------------
@@ -153,12 +152,12 @@ need to set either `g:livepreview_use_biber` or `backend=bibtex`, but not both.
 
 ### Autocmd
 
-By default, the LaTeX sources will be recompiled each time the buffer is written
-to disk, but also when the cursor holds. To prevent recompilation on cursor
+By default, the LaTeX sources will only be recompiled each time the buffer is written
+to disk. To activate recompilation on cursor
 hold (autocmd events `CursorHold` and `CursorHoldI`), use the feature flag:
 
 ```vim
-let g:livepreview_cursorhold_recompile = 0
+let g:livepreview_cursorhold_recompile = 1
 ```
 
 Known issues
