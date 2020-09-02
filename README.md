@@ -38,7 +38,7 @@ Add the plugin in the vim-plug section of your `~/.vimrc`:
 call plug#begin('~/.vim/plugged')
 [...]
 " A Vim Plugin for Lively Previewing LaTeX PDF Output
-Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
+Plug 'ahauser31/vim-latex-live-preview-nopython', { 'for': 'tex' }
 [...]
 call plug#end()
 ```
@@ -58,7 +58,7 @@ Add the plugin in the Vundle section of your `~/.vimrc`:
 call vundle#begin()
 [...]
 " A Vim Plugin for Lively Previewing LaTeX PDF Output
-Plugin 'xuhdev/vim-latex-live-preview'
+Plugin 'ahauser31/vim-latex-live-preview-nopython'
 [...]
 call vundle#end()
 ```
