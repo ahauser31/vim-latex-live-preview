@@ -8,7 +8,13 @@ vim-latex-live-preview only support UNIX-like systems.
   
 This fork includes several changes for usage of the plugin on macOs, specifically
 for using the viewer Skim. If you are not using macOS / Skim, please stick to
-the main branch by xuhdev.
+the main branch by xuhdev.  
+  
+In addition, this fork gets rid of Python. It's not needed when features of modern
+vim / neovim are used and just slows everything down.  
+  
+Lastly, this fork changes the command to start the preview to something easier to
+remember (see below).
 
 Table of Contents
 -----------------
@@ -22,8 +28,7 @@ Table of Contents
 Installation
 ------------
 
-Before installing, you need to make sure your Vim version is later than 7.3,
-and is compiled with `+python` feature.
+Before installing, you need to make sure your Vim version is later than 7.3.
 
 ### [vim-plug](https://github.com/junegunn/vim-plug)
 
@@ -72,25 +77,14 @@ Copy `plugin/latexlivepreview.vim` to `~/.vim/plugin`.
 Usage
 -----
 
-Simply execute `:LLPStartPreview` to launch the previewer. Then try to type in
+Simply execute `:LatexPreview` to launch the previewer. Then try to type in
 Vim and you should see the live update. The updating time could be set by Vim's
 ['updatetime'][] option. If your pdf viewer crashes when updates happen, you can
 try to set 'updatetime' to a higher value to make it update less frequently. The
 suggested value of 'updatetime' is `1000`.
 
-If the root file is not the file you are currently editing, you can specify it
-by executing `:LLPStartPreview <root-filename>` or executing `:LLPStartPreview`
-with the following declaration in the first line of your source file:
-
-```latex
-% !TEX root = <root-filename>
-```
-
-The path to the root file can be an absolute path or a relative path, in which
-case it is **relative to the parent directory of the current file**.
-
-:warning: if `<root-filename>` contains special characters (such as space), they
-must be escaped manually.
+If the root file is not the file you are currently editing, please switch to the root
+file before running the script.
 
 Configuration
 -------------
@@ -192,17 +186,6 @@ swap filename collision.
 Currently, root file must be in the same directory or upper in the project tree
 (otherwise, one has to save file to update the preview).
 
-### E492: Not an editor command: LLPStartPreview
-
-See [issue #12](https://github.com/xuhdev/vim-latex-live-preview/issues/12),
-provided the plugin is correctly installed, this is likely a **Python** issue.
-
-### Python-related issues
-
-See [issue #24](https://github.com/xuhdev/vim-latex-live-preview/issues/24),
-currently `vim-latex-live-preview` does not support `python/dyn` and Vim
-must be recompiled with Python support.
-
 ### Bibliography issues
 
 Why doesn't my bibliography appear, with or without an error?
@@ -228,5 +211,6 @@ The screenshot is at ./misc/screenshot-evince.gif
 -->
 
 ['updatetime']: http://vimdoc.sourceforge.net/htmldoc/options.html#%27updatetime%27
+[Skim]: https://skim-app.sourceforge.io/
 [evince]: http://projects.gnome.org/evince/
 [okular]: http://okular.kde.org/
