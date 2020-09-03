@@ -8,11 +8,23 @@ This fork includes several changes for usage of the plugin on macOs, specificall
 for using the viewer Skim. If you are not using macOS / Skim, please stick to
 the main branch by xuhdev.  
   
-In addition, this fork gets rid of Python. It's not needed when features of modern
+This fork gets rid of Python. It's not needed when features of modern
 vim / neovim are used and just slows everything down.  
   
-Lastly, this fork changes the command to start the preview to something easier to
-remember (see below).
+In addition, this fork changes the command to start the preview to something easier
+to remember (see below), adds a new command for a one-off compile in the working
+directory and strips some features that I felt are not that useful, such as searching
+for the root file or marking the root file by a header declaration. Just run it on
+the root file only.
+
+Lastly, this fork includes some additions for better macOS & Skim PDF viewer support.
+If you are using macOS Preview or other apps with the `open` command, this will allow
+you to use the plugin without erroring out. A small shell script for Skim
+called `skimmer` is provided to make better use of Skim's reloading abilities.
+
+Final word: This fork works only on neovim. Regular Vim can be supported as well with
+some small changes, but since I don't use regular vim, I can't test it and will leave
+it unsupported for now. If anyone wants to try and modify it, please give it a go.
 
 Table of Contents
 -----------------
@@ -26,7 +38,7 @@ Table of Contents
 Installation
 ------------
 
-Before installing, you need to make sure your Vim version is later than 7.3.
+Before installing, you need to make sure you are using a recent version of Neovim.
 
 ### [vim-plug](https://github.com/junegunn/vim-plug)
 
