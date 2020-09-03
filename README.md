@@ -3,11 +3,25 @@ A Vim Plugin for Lively Previewing LaTeX PDF Output
 
 This plugin provides a preview of the output PDF of your LaTeX file.
 Currently, vim-latex-live-preview-nopython only support UNIX-like systems.
-  
-This fork includes several changes for usage of the plugin on macOs, specifically
-for using the viewer Skim. If you are not using macOS / Skim, please stick to
-the main branch by xuhdev.  
-  
+
+Big thanks to xuhdev. Your original plugin is great and gave me many ideas.
+I have some different preferences which is why I forked it. If you read
+this and like any of my ideas, I would be happy to prepare a pull request for
+the main branch.
+
+Table of Contents
+-----------------
+
+- [Changes to main branch](#changes-to-main-branch)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+- [Known issues](#known-issues)
+- [Screenshot](#screenshot)
+
+Changes to main branch
+----------------------
+
 This fork gets rid of Python. It's not needed when features of modern
 vim / neovim are used and just slows everything down.  
   
@@ -22,18 +36,14 @@ If you are using macOS Preview or other apps with the `open` command, this will 
 you to use the plugin without erroring out. A small shell script for Skim
 called `skimmer` is provided to make better use of Skim's reloading abilities.
 
-Final word: This fork works only on neovim. Regular Vim can be supported as well with
-some small changes, but since I don't use regular vim, I can't test it and will leave
-it unsupported for now. If anyone wants to try and modify it, please give it a go.
+Final word: This fork works only on neovim. Regular Vim can be supported as well
+with some small changes, but since I don't use regular vim, I can't test it and
+will leave it unsupported for now. If anyone wants to try and modify it, please
+give it a go.
 
-Table of Contents
------------------
-
-- [Installation](#installation)
-- [Usage](#usage)
-- [Configuration](#configuration)
-- [Known issues](#known-issues)
-- [Screenshot](#screenshot)
+If you encounter any problem, please open an issue. If you prefer the root file
+handling on the main branch by xuhdev, please let me know and I will think about
+how to inlude that in a more stable way.
 
 Installation
 ------------
